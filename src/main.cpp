@@ -5,12 +5,17 @@
 
 #include <Arduino.h>
 #include <WiFi.h>
+#include <DNSServer.h>
+#include <WebServer.h>
+#include <WiFiManager.h>
 
 #include "./epaper/epaper.h"
 
 void setup()
 {
+  WiFiManager wifiManager;
   init_display();
+  wifiManager.autoConnect("iArradio", "iArradio123");
   main_interface("24/12/2022", "23:59", "Domingo", "35");
   sleep(3);
   // set_epaper_time("00:00");
