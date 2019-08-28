@@ -4,11 +4,13 @@
 #include <GxEPD2_3C.h>
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeSans12pt7b.h>
+#include <Fonts/FreeSansBold9pt7b.h>
 #include <Fonts/FreeSansBold18pt7b.h>
 #include <Fonts/FreeSansBold24pt7b.h>
 #include "./resources/weather-icons.h"
 
-GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
+//GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
+GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
 
 void subrutine_time(String time)
 {
@@ -30,7 +32,7 @@ void subrutine_date(String date, String dayOfWeek)
 
 void subrutine_meteo(String temperature)
 {
-    display.setTextColor(GxEPD_COLORED);
+    display.setTextColor(GxEPD_BLACK);
     display.setCursor(109, 42);
     display.setFont(&Meteocons_Regular_35);
     display.write(39);
@@ -39,6 +41,14 @@ void subrutine_meteo(String temperature)
     display.setFont(&Meteocons_Regular_35);
     display.write(42);
     display.write(49);
+}
+
+void subrutine_station(String station)
+{
+    display.setTextColor(GxEPD_BLACK);
+    display.setFont(&FreeSansBold9pt7b);
+    display.setCursor(0, 140);
+    display.print(station);
 }
 
 void init_display()
@@ -57,7 +67,7 @@ void init_display()
     display.firstPage();
     do
     {
-        display.fillScreen(GxEPD_COLORED);
+        display.fillScreen(GxEPD_BLACK);
         display.setTextColor(GxEPD_WHITE);
         display.setCursor(x, y);
         display.print("iArradio");
@@ -80,6 +90,14 @@ void main_interface(String date, String time, String dayOfWeek, String temperatu
         subrutine_date(date, dayOfWeek);
         subrutine_meteo(temperature);
     } while (display.nextPage());
+    if (display.epd2.hasFastPartialUpdate)
+    {
+        Serial.printf("HAS PARTIAL UPDATE");
+    }
+    else
+    {
+        Serial.printf("DOES NOT HAS PARTIAL UPDATE");
+    }
 }
 
 void set_epaper_time(String time)
@@ -109,5 +127,15 @@ void set_epaper_meteo(String temperature)
     {
         display.fillScreen(GxEPD_WHITE);
         subrutine_meteo(temperature);
+    } while (display.nextPage());
+}
+
+void set_epaper_station(String station)
+{
+    display.setPartialWindow(0, 128, display.width(), display.height() - 125);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_station(station);
     } while (display.nextPage());
 }
