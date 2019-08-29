@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 void init_display();
 void weathericonsTest();
 void main_interface(String date, String time, String dayOfWeek, String temperature);

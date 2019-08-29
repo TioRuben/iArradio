@@ -10,10 +10,11 @@
 #include <WiFiManager.h>
 
 #include "./epaper/epaper.h"
-#include "Audio.h"
+#include "./audio/icy_stream.h"
+#include "./external_data/ntp_time.h"
 
-Audio audio;
-const char *orig_station;
+uint16_t old_millis = millis();
+uint16_t minutes = 0;
 
 void setup()
 {
@@ -21,74 +22,44 @@ void setup()
   init_display();
   Serial.begin(115200);
   wifiManager.autoConnect("iArradio", "iArradio123");
-  main_interface("24/12/2022", "23:59", "Domingo", "35");
-  audio.setPinout(26, 25, 19);
-  audio.setVolume(5);
-  audio.connecttohost("http://20873.live.streamtheworld.com/CADENASER.mp3");
-  set_epaper_station("Cadena SER");
+  init_ntp();
+  update_ntp();
+  main_interface(ntp_get_date(), ntp_get_hour(), ntp_get_day_of_week(), "35");
+  set_epaper_station(init_audio());
+}
+
+void task_ntp(void *parameter)
+{
+  ntp_update_rutine();
+  vTaskDelete(NULL);
+}
+
+void task_audio(void *parameter)
+{
+  audio_rutine();
+  vTaskDelete(NULL);
 }
 
 void loop()
 {
-  audio.loop();
-}
-
-void audio_info(const char *info)
-{
-  Serial.print("info        ");
-  Serial.println(info);
-}
-void audio_id3data(const char *info)
-{ //id3 metadata
-  Serial.print("id3data     ");
-  Serial.println(info);
-}
-void audio_eof_mp3(const char *info)
-{ //end of file
-  Serial.print("eof_mp3     ");
-  Serial.println(info);
-}
-void audio_showstation(const char *info)
-{
-  Serial.print("station     ");
-  Serial.println(info);
-}
-void audio_showstreaminfo(const char *info)
-{
-  Serial.print("streaminfo  ");
-  Serial.println(info);
-}
-void audio_showstreamtitle(const char *info)
-{
-  Serial.print("streamtitle ");
-  Serial.println(info);
-  if (info)
+  if (millis() - old_millis > 5000)
   {
-    set_epaper_station(String(info));
+    // xTaskCreate(
+    //     task_ntp,
+    //     "NTPUPDATE",
+    //     10000,
+    //     NULL,
+    //     1,
+    //     NULL);
+    ntp_update_rutine();
+    old_millis = millis();
   }
-}
-void audio_bitrate(const char *info)
-{
-  Serial.print("bitrate     ");
-  Serial.println(info);
-}
-void audio_commercial(const char *info)
-{ //duration in sec
-  Serial.print("commercial  ");
-  Serial.println(info);
-}
-void audio_icyurl(const char *info)
-{ //homepage
-  Serial.print("icyurl      ");
-  Serial.println(info);
-}
-void audio_lasthost(const char *info)
-{ //stream URL played
-  Serial.print("lasthost    ");
-  Serial.println(info);
-}
-void audio_eof_speech(const char *info)
-{
-  Serial.print("eof_speech  ");
-  Serial.println(info);
+  audio_rutine();
+  // xTaskCreate(
+  //     task_audio,
+  //     "AUDIO",
+  //     10000,
+  //     NULL,
+  //     1,
+  //     NULL);
 }

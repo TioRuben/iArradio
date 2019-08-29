@@ -90,14 +90,6 @@ void main_interface(String date, String time, String dayOfWeek, String temperatu
         subrutine_date(date, dayOfWeek);
         subrutine_meteo(temperature);
     } while (display.nextPage());
-    if (display.epd2.hasFastPartialUpdate)
-    {
-        Serial.printf("HAS PARTIAL UPDATE");
-    }
-    else
-    {
-        Serial.printf("DOES NOT HAS PARTIAL UPDATE");
-    }
 }
 
 void set_epaper_time(String time)
