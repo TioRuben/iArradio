@@ -1,15 +1,11 @@
-#include <SPI.h>
-#define ENABLE_GxEPD2_GFX 0
-#include <GxEPD2_BW.h>
-#include <GxEPD2_3C.h>
+#include "epaper.h"
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeSans12pt7b.h>
 #include <Fonts/FreeSansBold9pt7b.h>
 #include <Fonts/FreeSansBold18pt7b.h>
 #include <Fonts/FreeSansBold24pt7b.h>
-#include "./resources/weather-icons.h"
+#include "resources/weather-icons.h"
 
-//GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
 GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
 
 void subrutine_time(String time)
@@ -51,12 +47,26 @@ void subrutine_station(String station)
     display.print(station);
 }
 
+void subrutine_battery(uint8_t percentage)
+{
+    display.drawRect(112, 98, 40, 15, GxEPD_BLACK);
+    display.fillRect(152, 102, 3, 7, GxEPD_BLACK);
+    Serial.printf("percentage %d width %d", percentage, (int16_t)40 * (percentage / 100));
+    display.fillRect(112, 98, (int16_t)(40 * percentage / 100), 15, GxEPD_BLACK);
+}
+
 void init_display()
 {
     SPI.end();
     SPI.begin(18, 12, 23, 15);
     display.init(115200);
     display.setRotation(1);
+    display.fillScreen(GxEPD_WHITE);
+    display.refresh();
+}
+
+void logo_screen()
+{
     display.setFont(&FreeSansBold24pt7b);
     int16_t tbx, tby;
     uint16_t tbw, tbh;
@@ -77,7 +87,7 @@ void init_display()
     } while (display.nextPage());
 }
 
-void main_interface(String date, String time, String dayOfWeek, String temperature)
+void main_interface(String date, String time, String dayOfWeek, String temperature, uint8_t battery_percentage)
 {
     do
     {
@@ -89,6 +99,7 @@ void main_interface(String date, String time, String dayOfWeek, String temperatu
         subrutine_time(time);
         subrutine_date(date, dayOfWeek);
         subrutine_meteo(temperature);
+        subrutine_battery(battery_percentage);
     } while (display.nextPage());
 }
 
@@ -129,5 +140,15 @@ void set_epaper_station(String station)
     {
         display.fillScreen(GxEPD_WHITE);
         subrutine_station(station);
+    } while (display.nextPage());
+}
+
+void set_epaper_battery(uint8_t percentage)
+{
+    display.setPartialWindow(111, 97, 154, 17);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_battery(percentage);
     } while (display.nextPage());
 }

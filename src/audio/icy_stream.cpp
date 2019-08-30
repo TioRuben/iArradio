@@ -5,7 +5,7 @@ Audio audio;
 String init_audio()
 {
     audio.setPinout(BCLK_PIN, LRC_PIN, DOUT_PIN);
-    audio.setVolume(15);
+    audio.setVolume(21);
     audio.connecttohost("http://rne.rtveradio.cires21.com/rne_hc.mp3");
     return String("Escuchando RNE1");
 }
