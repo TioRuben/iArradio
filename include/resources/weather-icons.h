@@ -1,5 +1,6 @@
-// Created by http://oleddisplay.squix.ch/ Consider a donation
-// In case of problems make sure that you are using the font file with the correct version!
+#include <Arduino.h>
+#include <gfxfont.h>
+
 const uint8_t Meteocons_Regular_35Bitmaps[] PROGMEM = {
 
 	// Bitmap Data:
@@ -98,6 +99,7 @@ const uint8_t Meteocons_Regular_35Bitmaps[] PROGMEM = {
 	0x00, // '|'
 	0x00 // '}'
 };
+
 const GFXglyph Meteocons_Regular_35Glyphs[] PROGMEM = {
 // bitmapOffset, width, height, xAdvance, xOffset, yOffset
 	  {     0,   1,   1,  36,    0,    0 }, // ' '
@@ -195,5 +197,3 @@ const GFXglyph Meteocons_Regular_35Glyphs[] PROGMEM = {
 	  {  5406,   1,   1,  36,    0,    0 }, // '|'
 	  {  5407,   1,   1,  36,    0,    0 } // '}'
 };
-const GFXfont Meteocons_Regular_35 PROGMEM = {
-(uint8_t  *)Meteocons_Regular_35Bitmaps,(GFXglyph *)Meteocons_Regular_35Glyphs,0x20, 0x7E, 36};

@@ -51,7 +51,6 @@ void subrutine_battery(uint8_t percentage)
 {
     display.drawRect(112, 98, 40, 15, GxEPD_BLACK);
     display.fillRect(152, 102, 3, 7, GxEPD_BLACK);
-    Serial.printf("percentage %d width %d", percentage, (int16_t)40 * (percentage / 100));
     display.fillRect(112, 98, (int16_t)(40 * percentage / 100), 15, GxEPD_BLACK);
 }
 
@@ -65,7 +64,7 @@ void init_display()
     display.refresh();
 }
 
-void logo_screen()
+void logo_screen(String message)
 {
     display.setFont(&FreeSansBold24pt7b);
     int16_t tbx, tby;
@@ -77,13 +76,13 @@ void logo_screen()
     display.firstPage();
     do
     {
-        display.fillScreen(GxEPD_BLACK);
-        display.setTextColor(GxEPD_WHITE);
+        display.fillScreen(GxEPD_WHITE);
+        display.setTextColor(GxEPD_BLACK);
         display.setCursor(x, y);
         display.print("iArradio");
         display.setCursor(24, 160);
         display.setFont(&FreeSans9pt7b);
-        display.print("Iniciando...");
+        display.print(message);
     } while (display.nextPage());
 }
 
@@ -98,7 +97,7 @@ void main_interface(String date, String time, String dayOfWeek, String temperatu
         display.drawFastVLine(108, 0, 124, GxEPD_BLACK);
         subrutine_time(time);
         subrutine_date(date, dayOfWeek);
-        subrutine_meteo(temperature);
+        //subrutine_meteo(temperature);
         subrutine_battery(battery_percentage);
     } while (display.nextPage());
 }

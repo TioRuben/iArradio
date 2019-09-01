@@ -1,18 +1,13 @@
-/**
- * Dont forget
- * SetPinout(26, 25, 19);
- * */
-
 #include <Arduino.h>
 #include <WiFi.h>
 #include <DNSServer.h>
 #include <WebServer.h>
 #include <WiFiManager.h>
 
-#include "epaper/epaper.h"
-#include "audio/icy_stream.h"
-#include "external_data/ntp_time.h"
-#include "hardware_data/battery_capacity.h"
+#include "epaper.h"
+#include "icy_stream.h"
+#include "ntp_time.h"
+#include "battery_capacity.h"
 
 long unsigned int old_millis = 0;
 uint8_t cycles = 0;
@@ -35,7 +30,13 @@ void task_ntp(void *parameter)
   vTaskDelete(NULL);
 }
 
-void task_audio(void *parameter)
+void task_epaper_battery(void *parameter)
+{
+  set_epaper_battery(get_battery_capacity());
+  vTaskDelete(NULL);
+}
+
+void task_audio_stream(void *parameter)
 {
   audio_rutine();
   vTaskDelete(NULL);
@@ -43,33 +44,19 @@ void task_audio(void *parameter)
 
 void loop()
 {
-  audio_rutine();
+  xTaskCreate(task_audio_stream, "TaskAudio", 100000, NULL, configMAX_PRIORITIES - 4, NULL);
   if (millis() - old_millis > 5000)
   {
-    // xTaskCreate(
-    //     task_ntp,
-    //     "NTPUPDATE",
-    //     10000,
-    //     NULL,
-    //     1,
-    //     NULL);
     old_millis = millis();
     cycles++;
     if (cycles >= 12)
     {
       cycles = 0;
-      set_epaper_battery(get_battery_capacity());
+      xTaskCreate(task_epaper_battery, "TaskEpaper", 50000, NULL, 1, NULL);
     }
     else
     {
-      ntp_update_rutine();
+      xTaskCreate(task_ntp, "TaskNTP", 50000, NULL, 1, NULL);
     }
   }
-  // xTaskCreate(
-  //     task_audio,
-  //     "AUDIO",
-  //     10000,
-  //     NULL,
-  //     1,
-  //     NULL);
 }

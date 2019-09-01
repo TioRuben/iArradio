@@ -1,5 +1,4 @@
 #include "ntp_time.h"
-#include "../epaper/epaper.h"
 
 WiFiUDP wifiUdp;
 NTP ntp(wifiUdp);
