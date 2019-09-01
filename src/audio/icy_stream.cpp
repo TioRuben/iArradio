@@ -1,17 +1,19 @@
 #include "icy_stream.h"
+#include "tasks.h"
 
 Audio audio;
 uint8_t volume = 21;
+const char *old_info = "";
 
 String init_audio()
 {
     audio.setPinout(BCLK_PIN, LRC_PIN, DOUT_PIN);
     audio.setVolume(volume);
-    audio.connecttohost("http://rne.rtveradio.cires21.com/rne_hc.mp3");
+    audio.connecttohost("http://19993.live.streamtheworld.com/LOS40.mp3");
     return String("Escuchando RNE1");
 }
 
-void audio_rutine()
+void IRAM_ATTR audio_rutine()
 {
     audio.loop();
 }
@@ -26,9 +28,11 @@ void audio_showstreamtitle(const char *info)
 {
     Serial.print("streamtitle ");
     Serial.println(info);
-    if (info)
+    if (strcmp(info, old_info) != 0)
     {
-        set_epaper_station(String(info));
+        Serial.println("CHANGING streamtitle");
+        old_info = info;
+        xTaskCreate(task_stream_title, "TaskStreamTitle", 50000, (void *)&info, 1, NULL);
     }
 }
 

@@ -6,5 +6,5 @@
 #define DOUT_PIN 19
 
 String init_audio();
-void audio_rutine();
+void IRAM_ATTR audio_rutine();
 void increase_volume(int8_t amount);

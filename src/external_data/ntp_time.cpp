@@ -48,12 +48,12 @@ void ntp_update_rutine()
 {
     if (ntp_get_minutes() != current_minute)
     {
+        current_minute = ntp_get_minutes();
         set_epaper_time(ntp_get_hour());
         if (ntp_get_day_index() != current_dayweek)
         {
-            set_epaper_date(ntp_get_date(), ntp_get_day_of_week());
             current_dayweek = ntp_get_day_index();
+            set_epaper_date(ntp_get_date(), ntp_get_day_of_week());
         }
-        current_minute = ntp_get_minutes();
     }
 }

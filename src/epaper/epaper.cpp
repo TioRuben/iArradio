@@ -6,7 +6,8 @@
 #include <Fonts/FreeSansBold24pt7b.h>
 #include "resources/weather-icons.h"
 
-GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
+//GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
+GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
 
 void subrutine_time(String time)
 {
@@ -86,7 +87,7 @@ void logo_screen(String message)
     } while (display.nextPage());
 }
 
-void main_interface(String date, String time, String dayOfWeek, String temperature, uint8_t battery_percentage)
+void main_interface()
 {
     do
     {
@@ -95,10 +96,7 @@ void main_interface(String date, String time, String dayOfWeek, String temperatu
         display.drawFastHLine(0, 124, 264, GxEPD_BLACK);
         display.drawFastHLine(108, 85, 156, GxEPD_BLACK);
         display.drawFastVLine(108, 0, 124, GxEPD_BLACK);
-        subrutine_time(time);
-        subrutine_date(date, dayOfWeek);
-        //subrutine_meteo(temperature);
-        subrutine_battery(battery_percentage);
+        subrutine_battery(0);
     } while (display.nextPage());
 }
 
@@ -144,7 +142,7 @@ void set_epaper_station(String station)
 
 void set_epaper_battery(uint8_t percentage)
 {
-    display.setPartialWindow(111, 97, 154, 17);
+    display.setPartialWindow(111, 97, 42, 17);
     do
     {
         display.fillScreen(GxEPD_WHITE);

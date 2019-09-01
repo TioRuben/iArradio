@@ -197,3 +197,6 @@ const GFXglyph Meteocons_Regular_35Glyphs[] PROGMEM = {
 	  {  5406,   1,   1,  36,    0,    0 }, // '|'
 	  {  5407,   1,   1,  36,    0,    0 } // '}'
 };
+
+const GFXfont Meteocons_Regular_35 PROGMEM = {
+(uint8_t  *)Meteocons_Regular_35Bitmaps,(GFXglyph *)Meteocons_Regular_35Glyphs,0x20, 0x7E, 36};
