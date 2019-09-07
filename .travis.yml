@@ -26,16 +26,19 @@
 
 language: python
 python:
-    - "2.7"
+  - "3.7"
 
 sudo: false
 cache:
-    directories:
-        - "~/.platformio"
+  directories:
+    - "~/.platformio"
+
+before_install:
+  - mv include/settings.example.h include/settings.h
 
 install:
-    - pip install -U platformio
-    - platformio update
+  - pip install -U platformio
+  - platformio update
 
 script:
     - platformio run
