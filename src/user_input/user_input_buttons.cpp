@@ -1,8 +1,8 @@
 #include "user_input_buttons.h"
 
-EasyButton home_button(HOME_BUTTON);
-EasyButton prev_button(PREV_BUTTON);
-EasyButton next_button(NEXT_BUTTON);
+EasyButton home_button(HOME_BUTTON, DEBOUNCETIME);
+EasyButton prev_button(PREV_BUTTON, DEBOUNCETIME);
+EasyButton next_button(NEXT_BUTTON, DEBOUNCETIME);
 
 void configure_buttons()
 {

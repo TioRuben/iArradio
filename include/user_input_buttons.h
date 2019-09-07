@@ -3,9 +3,8 @@
 #include "icy_stream.h"
 #include "epaper.h"
 #include "controls.h"
+#include "settings.h"
 #include "hal.h"
-
-#define HOLD_TIMEOUT 2000
 
 void configure_buttons();
 void buttons_rutine();

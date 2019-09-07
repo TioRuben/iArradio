@@ -12,5 +12,3 @@
 #define HOME_BUTTON 37
 #define PREV_BUTTON 38
 #define NEXT_BUTTON 39
-
-#define DEBOUNCETIME 10

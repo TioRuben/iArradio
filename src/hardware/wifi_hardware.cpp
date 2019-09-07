@@ -3,5 +3,5 @@
 void init_wifi()
 {
     WiFiManager wifiManager;
-    wifiManager.autoConnect("iArradio", "iArradio123");
+    wifiManager.autoConnect(WIFI_AP_NAME, WIFI_AP_PASS);
 }

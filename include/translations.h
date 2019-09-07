@@ -5,3 +5,6 @@
 #define THURSDAY "jueves"
 #define FRIDAY "viernes"
 #define SATURDAY "sábado"
+
+#define POWEROFF "Apagado"
+#define LOWBATT "Batería Baja"
