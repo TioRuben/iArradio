@@ -6,7 +6,6 @@
 #include <Fonts/FreeSansBold24pt7b.h>
 #include "resources/weather-icons.h"
 #include "resources/fontello10pt7b.h"
-#include "resources/images.h"
 
 #define SPEAKER_ICON "0"
 #define WIFI_ICON "1"
