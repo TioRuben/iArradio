@@ -15,6 +15,7 @@ Libraries used:
  - [WIFIMANAGER-ESP32](https://github.com/zhouhan0126/WIFIMANAGER-ESP32)
    - [Web Server](https://github.com/zhouhan0126/WebServer-esp32)
    - [DNS Server](https://github.com/zhouhan0126/DNSServer---esp32)
+ - [EasyButton](https://github.com/evert-arias/EasyButton)
 
  ## Current Status
  Under development (initial working version)
