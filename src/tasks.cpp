@@ -1,9 +1,7 @@
-#include <Arduino.h>
-#include "ntp_time.h"
-#include "battery_capacity.h"
-#include "icy_stream.h"
+#include "tasks.h"
 
 volatile bool updating = false;
+volatile uint8_t old_capacity = 0;
 
 void task_ntp(void *parameter)
 {
@@ -22,7 +20,6 @@ void task_ntp(void *parameter)
 
 void task_epaper_battery(void *parameter)
 {
-    volatile uint8_t old_capacity = 0;
     for (;;)
     {
         if (!updating)
@@ -49,6 +46,21 @@ void task_stream_title(void *parameter)
         {
             updating = true;
             set_epaper_station(*((String *)parameter));
+            updating = false;
+            break;
+        }
+    }
+    vTaskDelete(NULL);
+}
+
+void task_epaper_volume(void *parameter)
+{
+    for (;;)
+    {
+        if (!updating)
+        {
+            updating = true;
+            set_epaper_volume(*((uint8_t *)parameter));
             updating = false;
             break;
         }

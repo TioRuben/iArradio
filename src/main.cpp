@@ -1,30 +1,29 @@
 #include <Arduino.h>
-#include <WiFi.h>
-#include <DNSServer.h>
-#include <WebServer.h>
-#include <WiFiManager.h>
-
+#include "wifi_hardware.h"
 #include "epaper.h"
 #include "icy_stream.h"
 #include "ntp_time.h"
-#include "battery_capacity.h"
+#include "battery.h"
+#include "user_input_buttons.h"
 #include "tasks.h"
+#include "hal.h"
 
 void setup()
 {
-  WiFiManager wifiManager;
-  init_display();
   Serial.begin(115200);
-  wifiManager.autoConnect("iArradio", "iArradio123");
-  init_ntp();
-  update_ntp();
+  init_display();
   main_interface();
+  init_wifi();
+  init_ntp();
   set_epaper_station(init_audio());
+  configure_buttons();
   xTaskCreate(task_ntp, "TaskNTP", 50000, NULL, 1, NULL);
   xTaskCreate(task_epaper_battery, "TaskEpaperBattery", 50000, NULL, 1, NULL);
+  increase_volume(0);
 }
 
 void loop()
 {
   audio_rutine();
+  buttons_rutine();
 }

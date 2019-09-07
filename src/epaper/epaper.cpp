@@ -5,9 +5,15 @@
 #include <Fonts/FreeSansBold18pt7b.h>
 #include <Fonts/FreeSansBold24pt7b.h>
 #include "resources/weather-icons.h"
+#include "resources/fontello10pt7b.h"
+#include "resources/images.h"
 
-//GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
-GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
+#define SPEAKER_ICON "0"
+#define WIFI_ICON "1"
+#define SELECTED_ICON "2"
+
+GxEPD2_BW<GxEPD2_270, GxEPD2_270::HEIGHT> display(GxEPD2_270(EPAPER_CS, EPAPER_DC, EPAPER_RST, EPAPER_BUSY));
+//GxEPD2_3C<GxEPD2_270c, GxEPD2_270c::HEIGHT> display(GxEPD2_270c(/*CS=*/5, /*DC=*/17, /*RST=*/16, /*BUSY=*/4));
 
 void subrutine_time(String time)
 {
@@ -15,6 +21,17 @@ void subrutine_time(String time)
     display.setFont(&FreeSansBold18pt7b);
     display.setCursor(10, 42);
     display.print(time);
+}
+
+void set_epaper_time(String time)
+{
+    display.setPartialWindow(10, 16, 85, 25);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_time(time);
+    } while (display.nextPage());
+    display.powerOff();
 }
 
 void subrutine_date(String date, String dayOfWeek)
@@ -25,6 +42,17 @@ void subrutine_date(String date, String dayOfWeek)
     display.print(date);
     display.setCursor(5, 90);
     display.print(dayOfWeek);
+}
+
+void set_epaper_date(String date, String dayOfWeek)
+{
+    display.setPartialWindow(0, 59, 100, 36);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_date(date, dayOfWeek);
+    } while (display.nextPage());
+    display.powerOff();
 }
 
 void subrutine_meteo(String temperature)
@@ -40,6 +68,17 @@ void subrutine_meteo(String temperature)
     display.write(49);
 }
 
+void set_epaper_meteo(String temperature)
+{
+    display.setPartialWindow(109, 0, display.width() - 109, 45);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_meteo(temperature);
+    } while (display.nextPage());
+    display.powerOff();
+}
+
 void subrutine_station(String station)
 {
     display.setTextColor(GxEPD_BLACK);
@@ -48,11 +87,54 @@ void subrutine_station(String station)
     display.print(station);
 }
 
+void set_epaper_station(String station)
+{
+    display.setPartialWindow(0, 128, display.width(), display.height() - 125);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_station(station);
+    } while (display.nextPage());
+    display.powerOff();
+}
+
 void subrutine_battery(uint8_t percentage)
 {
     display.drawRect(112, 98, 40, 15, GxEPD_BLACK);
     display.fillRect(152, 102, 3, 7, GxEPD_BLACK);
     display.fillRect(112, 98, (int16_t)(40 * percentage / 100), 15, GxEPD_BLACK);
+}
+
+void set_epaper_battery(uint8_t percentage)
+{
+    display.setPartialWindow(111, 97, 42, 17);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_battery(percentage);
+    } while (display.nextPage());
+    display.powerOff();
+}
+
+void subrutine_volume(uint8_t value)
+{
+    display.setFont(&fontello10pt7b);
+    display.setCursor(162, 112);
+    display.print(SELECTED_ICON);
+    display.print(SPEAKER_ICON);
+    display.setFont(&FreeSans9pt7b);
+    display.printf("%d", value);
+}
+
+void set_epaper_volume(uint8_t value)
+{
+    display.setPartialWindow(162, 97, 70, 17);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_volume(value);
+    } while (display.nextPage());
+    display.powerOff();
 }
 
 void init_display()
@@ -85,6 +167,7 @@ void logo_screen(String message)
         display.setFont(&FreeSans9pt7b);
         display.print(message);
     } while (display.nextPage());
+    display.powerOff();
 }
 
 void main_interface()
@@ -98,54 +181,5 @@ void main_interface()
         display.drawFastVLine(108, 0, 124, GxEPD_BLACK);
         subrutine_battery(0);
     } while (display.nextPage());
-}
-
-void set_epaper_time(String time)
-{
-    display.setPartialWindow(10, 16, 85, 25);
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-        subrutine_time(time);
-    } while (display.nextPage());
-}
-
-void set_epaper_date(String date, String dayOfWeek)
-{
-    display.setPartialWindow(0, 59, 100, 36);
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-        subrutine_date(date, dayOfWeek);
-    } while (display.nextPage());
-}
-
-void set_epaper_meteo(String temperature)
-{
-    display.setPartialWindow(109, 0, display.width() - 109, 45);
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-        subrutine_meteo(temperature);
-    } while (display.nextPage());
-}
-
-void set_epaper_station(String station)
-{
-    display.setPartialWindow(0, 128, display.width(), display.height() - 125);
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-        subrutine_station(station);
-    } while (display.nextPage());
-}
-
-void set_epaper_battery(uint8_t percentage)
-{
-    display.setPartialWindow(111, 97, 42, 17);
-    do
-    {
-        display.fillScreen(GxEPD_WHITE);
-        subrutine_battery(percentage);
-    } while (display.nextPage());
+    display.powerOff();
 }

@@ -11,6 +11,7 @@ void init_ntp()
     ntp.ruleDST("CEST", Last, Sun, Mar, 2, 120);
     ntp.ruleSTD("CET", Last, Sun, Oct, 3, 60);
     ntp.begin();
+    ntp.update();
 }
 
 void update_ntp()
