@@ -1,5 +1,5 @@
 # [WIP]iArradio
-[![Build Status](https://travis-ci.org/TioRuben/iArradio.svg?branch=master)](https://travis-ci.org/TioRuben/iArradio)
+[![Actions Status](https://github.com/TioRuben/iArradio/workflows/PlatformIO/badge.svg)](https://github.com/TioRuben/iArradio/actions)
 
 ## An Internet Radio based on TTGO-T5s EPaper module
 

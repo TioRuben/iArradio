@@ -1,4 +1,4 @@
-name: PlatformIO Build
+name: PlatformIO
 
 on: [push]
 
@@ -10,9 +10,10 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7]
-
     steps:
     - uses: actions/checkout@v1
+    - name: Move default settings to settings.h
+    - run: mv include/settings.example.h include/settings.h
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
