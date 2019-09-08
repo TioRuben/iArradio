@@ -2,6 +2,6 @@
 #include <DNSServer.h>
 #include <WebServer.h>
 #include <WiFiManager.h>
-#include "settings.h"
+#include "settings.hpp"
 
 void init_wifi();

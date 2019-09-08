@@ -1,4 +1,4 @@
-#include "wifi_hardware.h"
+#include "wifi_hardware.hpp"
 
 void init_wifi()
 {

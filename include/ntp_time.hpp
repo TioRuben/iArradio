@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include <WiFiUdp.h>
 #include <NTP.h>
-#include "epaper.h"
-#include "translations.h"
+#include "epaper.hpp"
+#include "translations.hpp"
 
 void init_ntp();
 void update_ntp();

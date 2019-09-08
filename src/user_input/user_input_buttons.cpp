@@ -1,4 +1,4 @@
-#include "user_input_buttons.h"
+#include "user_input_buttons.hpp"
 
 EasyButton home_button(HOME_BUTTON, DEBOUNCETIME);
 EasyButton prev_button(PREV_BUTTON, DEBOUNCETIME);

@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <EasyButton.h>
-#include "ntp_time.h"
-#include "battery.h"
-#include "icy_stream.h"
-#include "user_input_buttons.h"
+#include "ntp_time.hpp"
+#include "battery.hpp"
+#include "icy_stream.hpp"
+#include "user_input_buttons.hpp"
 
 void task_ntp(void *parameter);
 void task_epaper_battery(void *parameter);

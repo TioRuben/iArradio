@@ -1,4 +1,4 @@
-#include "ntp_time.h"
+#include "ntp_time.hpp"
 
 WiFiUDP wifiUdp;
 NTP ntp(wifiUdp);

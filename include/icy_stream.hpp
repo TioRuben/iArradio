@@ -1,6 +1,6 @@
-#include "epaper.h"
-#include "Audio.h"
-#include "hal.h"
+#include <Audio.h>
+#include "epaper.hpp"
+#include "hal.hpp"
 
 String init_audio();
 void IRAM_ATTR audio_rutine();

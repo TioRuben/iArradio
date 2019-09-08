@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <EasyButton.h>
-#include "icy_stream.h"
-#include "epaper.h"
-#include "controls.h"
-#include "settings.h"
-#include "hal.h"
+#include "icy_stream.hpp"
+#include "epaper.hpp"
+#include "controls.hpp"
+#include "settings.hpp"
+#include "hal.hpp"
 
 void configure_buttons();
 void buttons_rutine();

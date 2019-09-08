@@ -1,12 +1,12 @@
 #include <Arduino.h>
-#include "wifi_hardware.h"
-#include "epaper.h"
-#include "icy_stream.h"
-#include "ntp_time.h"
-#include "battery.h"
-#include "user_input_buttons.h"
-#include "tasks.h"
-#include "hal.h"
+#include "wifi_hardware.hpp"
+#include "epaper.hpp"
+#include "icy_stream.hpp"
+#include "ntp_time.hpp"
+#include "battery.hpp"
+#include "user_input_buttons.hpp"
+#include "tasks.hpp"
+#include "hal.hpp"
 
 void setup()
 {

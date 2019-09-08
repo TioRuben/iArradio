@@ -3,7 +3,7 @@
 #define ENABLE_GxEPD2_GFX 0
 #include <GxEPD2_BW.h>
 // #include <GxEPD2_3C.h>
-#include "hal.h"
+#include "hal.hpp"
 
 void init_display();
 void weathericonsTest();

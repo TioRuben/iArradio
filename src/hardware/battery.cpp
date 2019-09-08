@@ -1,4 +1,4 @@
-#include "battery.h"
+#include "battery.hpp"
 
 uint8_t get_battery_capacity()
 {

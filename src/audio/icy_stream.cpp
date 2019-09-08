@@ -1,5 +1,5 @@
-#include "icy_stream.h"
-#include "tasks.h"
+#include "icy_stream.hpp"
+#include "tasks.hpp"
 
 Audio audio;
 uint8_t volume = 10;

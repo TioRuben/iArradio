@@ -1,4 +1,4 @@
-#include "controls.h"
+#include "controls.hpp"
 
 void power_off()
 {
