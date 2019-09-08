@@ -1,8 +1,11 @@
 #include "user_input_buttons.hpp"
+#include "tasks.hpp"
 
 EasyButton home_button(HOME_BUTTON, DEBOUNCETIME);
 EasyButton prev_button(PREV_BUTTON, DEBOUNCETIME);
 EasyButton next_button(NEXT_BUTTON, DEBOUNCETIME);
+
+bool volume_mode = false;
 
 void configure_buttons()
 {
@@ -40,5 +43,6 @@ void handle_home_timeout()
 
 void handle_home()
 {
-    Serial.println("Change mode");
+    volume_mode = !volume_mode;
+    xTaskCreate(task_epaper_cursor, "TaskEpaperCursor", 5000, &volume_mode, 1, NULL);
 }

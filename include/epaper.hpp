@@ -21,3 +21,6 @@ void subrutine_station(String station);
 void subrutine_battery(uint8_t percentage);
 void subrutine_volume(uint8_t value);
 void set_epaper_volume(uint8_t value);
+void subrutine_cursor_volume(bool volume_mode);
+void subrutine_cursor_station(bool volume_mode);
+void set_epaper_cursor(bool volume_mode);

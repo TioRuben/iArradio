@@ -67,3 +67,18 @@ void task_epaper_volume(void *parameter)
     }
     vTaskDelete(NULL);
 }
+
+void task_epaper_cursor(void *parameter)
+{
+    for (;;)
+    {
+        if (!updating)
+        {
+            updating = true;
+            set_epaper_cursor(*((bool *)parameter));
+            updating = false;
+            break;
+        }
+    }
+    vTaskDelete(NULL);
+}

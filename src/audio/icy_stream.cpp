@@ -9,8 +9,8 @@ String init_audio()
 {
     audio.setPinout(BCLK_PIN, LRC_PIN, DOUT_PIN);
     audio.setVolume(volume);
-    audio.connecttohost("http://rne.rtveradio.cires21.com/rne_hc.mp3");
-    return String("Escuchando RNE1");
+    audio.connecttohost("http://20133.live.streamtheworld.com/CADENASER.mp3");
+    return String("Escuchando CADENA SER");
 }
 
 void IRAM_ATTR audio_rutine()

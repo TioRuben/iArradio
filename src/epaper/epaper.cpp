@@ -82,13 +82,13 @@ void subrutine_station(String station)
 {
     display.setTextColor(GxEPD_BLACK);
     display.setFont(&FreeSansBold9pt7b);
-    display.setCursor(0, 140);
+    display.setCursor(12, 140);
     display.print(station);
 }
 
 void set_epaper_station(String station)
 {
-    display.setPartialWindow(0, 128, display.width(), display.height() - 125);
+    display.setPartialWindow(12, 128, display.width() - 12, display.height() - 125);
     do
     {
         display.fillScreen(GxEPD_WHITE);
@@ -118,8 +118,7 @@ void set_epaper_battery(uint8_t percentage)
 void subrutine_volume(uint8_t value)
 {
     display.setFont(&fontello10pt7b);
-    display.setCursor(162, 112);
-    display.print(SELECTED_ICON);
+    display.setCursor(174, 112);
     display.print(SPEAKER_ICON);
     display.setFont(&FreeSans9pt7b);
     display.printf("%d", value);
@@ -127,11 +126,47 @@ void subrutine_volume(uint8_t value)
 
 void set_epaper_volume(uint8_t value)
 {
-    display.setPartialWindow(162, 97, 70, 17);
+    display.setPartialWindow(171, 97, 70, 17);
     do
     {
         display.fillScreen(GxEPD_WHITE);
         subrutine_volume(value);
+    } while (display.nextPage());
+    display.powerOff();
+}
+
+void subrutine_cursor_volume(bool volume_mode)
+{
+    display.setFont(&fontello10pt7b);
+    display.setCursor(162, 112);
+    display.setTextColor(volume_mode ? GxEPD_BLACK : GxEPD_WHITE);
+    display.print(SELECTED_ICON);
+    display.setTextColor(GxEPD_BLACK);
+}
+
+void subrutine_cursor_station(bool volume_mode)
+{
+    display.setFont(&fontello10pt7b);
+    display.setCursor(0, 142);
+    display.setTextColor(volume_mode ? GxEPD_WHITE : GxEPD_BLACK);
+    display.print(SELECTED_ICON);
+    display.setTextColor(GxEPD_BLACK);
+}
+
+void set_epaper_cursor(bool volume_mode)
+{
+    display.setPartialWindow(162, 97, 12, 17);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_cursor_volume(volume_mode);
+    } while (display.nextPage());
+
+    display.setPartialWindow(0, 128, 12, 17);
+    do
+    {
+        display.fillScreen(GxEPD_WHITE);
+        subrutine_cursor_station(volume_mode);
     } while (display.nextPage());
     display.powerOff();
 }
