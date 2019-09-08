@@ -47,7 +47,13 @@ void change_station(int8_t direction)
     }
     audio.stopSong();
     audio.connecttohost(stations[station_index].url);
-    station_text = String(LISTENING + ": " + (station_index + 1) + " - " + stations[station_index].name);
+    station_text = String(LISTENING + ": " + stations[station_index].name);
+    xTaskCreate(task_stream_title, "TaskEpaperStation", 5000, &station_text, 1, NULL);
+}
+
+void audio_showstreamtitle(const char *info)
+{
+    station_text = String(info);
     xTaskCreate(task_stream_title, "TaskEpaperStation", 5000, &station_text, 1, NULL);
 }
 
