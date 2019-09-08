@@ -15,7 +15,7 @@ void setup()
   main_interface();
   init_wifi();
   init_ntp();
-  set_epaper_station(init_audio());
+  init_audio();
   configure_buttons();
   xTaskCreate(task_ntp, "TaskNTP", 50000, NULL, 1, NULL);
   xTaskCreate(task_epaper_battery, "TaskEpaperBattery", 50000, NULL, 1, NULL);

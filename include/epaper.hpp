@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <SPI.h>
 #define ENABLE_GxEPD2_GFX 0
+#define DISABLE_DIAGNOSTIC_OUTPUT
 #include <GxEPD2_BW.h>
 // #include <GxEPD2_3C.h>
 #include "hal.hpp"

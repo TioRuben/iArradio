@@ -1,10 +1,11 @@
-#define SUNDAY "domingo"
-#define MONDAY "lunes"
-#define TUESDAY "martes"
-#define WEDNESDAY "miércoles"
-#define THURSDAY "jueves"
-#define FRIDAY "viernes"
-#define SATURDAY "sábado"
+#define SUNDAY String("domingo")
+#define MONDAY String("lunes")
+#define TUESDAY String("martes")
+#define WEDNESDAY String("miércoles")
+#define THURSDAY String("jueves")
+#define FRIDAY String("viernes")
+#define SATURDAY String("sábado")
 
-#define POWEROFF "Apagado"
-#define LOWBATT "Batería Baja"
+#define POWEROFF String("Apagado")
+#define LOWBATT String("Batería Baja")
+#define LISTENING String("Escuchando")

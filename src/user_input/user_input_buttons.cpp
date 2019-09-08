@@ -28,12 +28,26 @@ void buttons_rutine()
 
 void handle_prev_button()
 {
-    increase_volume(-1);
+    if (volume_mode)
+    {
+        increase_volume(-1);
+    }
+    else
+    {
+        change_station(-1);
+    }
 }
 
 void handle_next_button()
 {
-    increase_volume(1);
+    if (volume_mode)
+    {
+        increase_volume(1);
+    }
+    else
+    {
+        change_station(1);
+    }
 }
 
 void handle_home_timeout()
