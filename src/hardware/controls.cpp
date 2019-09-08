@@ -2,6 +2,7 @@
 
 void power_off()
 {
+    set_updating(true);
     audio_stop();
     logo_screen(POWEROFF);
     sleep(2);
@@ -10,6 +11,7 @@ void power_off()
 
 void low_battery()
 {
+    set_updating(true);
     audio_stop();
     logo_screen(LOWBATT);
     sleep(2);
