@@ -32,11 +32,15 @@ void audio_info(const char *info)
 
 void change_station(int8_t direction)
 {
-    station_index += direction;
-    if (station_index < 0)
+    if (station_index == 0 && direction == -1)
     {
         station_index = TOTAL_STATIONS - 1;
     }
+    else
+    {
+        station_index += direction;
+    }
+
     if (station_index >= TOTAL_STATIONS)
     {
         station_index = 0;
