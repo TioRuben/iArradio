@@ -14,7 +14,7 @@ void init_audio()
     change_station(0);
 }
 
-void IRAM_ATTR audio_rutine()
+void audio_rutine()
 {
     audio.loop();
 }

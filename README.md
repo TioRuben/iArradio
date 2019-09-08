@@ -22,7 +22,7 @@ Libraries used:
  - [EasyButton](https://github.com/evert-arias/EasyButton)
 
  ## Current Status
- Radio works, display works, user can change volume and station. Still work in progress.
+ Radio works, display works, user can change volume and station. Only retrieve and display weather information left. Still work in progress.
 
  ## Icons and Fonts
  All icons and fonts used in this project has been generated or included in:
