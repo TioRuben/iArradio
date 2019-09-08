@@ -7,3 +7,5 @@ void IRAM_ATTR audio_rutine();
 void increase_volume(int8_t amount);
 void audio_stop();
 void change_station(int8_t direction);
+void set_volume(int8_t value);
+void set_station(int8_t index);

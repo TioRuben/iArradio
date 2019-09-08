@@ -5,3 +5,4 @@
 #include "settings.hpp"
 
 void init_wifi();
+int get_wifi_rssi();

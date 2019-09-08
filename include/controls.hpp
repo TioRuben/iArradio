@@ -5,3 +5,4 @@
 
 void power_off();
 void low_battery();
+void set_updating(bool value);

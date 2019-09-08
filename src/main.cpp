@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "wifi_hardware.hpp"
+#include "eeprom_settings.hpp"
 #include "epaper.hpp"
 #include "icy_stream.hpp"
 #include "ntp_time.hpp"
@@ -15,11 +16,14 @@ void setup()
   main_interface();
   init_wifi();
   init_ntp();
+  eeprom_init();
+  set_volume(eeprom_get_volume());
+  set_station(eeprom_get_station());
   init_audio();
   configure_buttons();
-  xTaskCreate(task_ntp, "TaskNTP", 50000, NULL, 1, NULL);
-  xTaskCreate(task_epaper_battery, "TaskEpaperBattery", 50000, NULL, 1, NULL);
-  increase_volume(0);
+  xTaskCreate(task_ntp, "TaskNTP", 35000, NULL, 1, NULL);
+  xTaskCreate(task_epaper_battery, "TaskEpaperBattery", 35000, NULL, 1, NULL);
+  xTaskCreate(task_epaper_rssi, "TaskEpaperRSSI", 35000, NULL, 1, NULL);
   handle_home();
 }
 
