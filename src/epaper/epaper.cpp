@@ -258,7 +258,7 @@ void logo_screen(String message)
         display.setTextColor(GxEPD_BLACK);
         display.setCursor(x, y);
         display.print("iArradio");
-        display.setCursor(24, 160);
+        display.setCursor(0, 150);
         display.setFont(&FreeSans9pt7b);
         display.print(message);
     } while (display.nextPage());

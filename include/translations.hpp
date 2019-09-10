@@ -9,3 +9,4 @@
 #define POWEROFF String("Apagado")
 #define LOWBATT String("Batería Baja")
 #define LISTENING String("Escuchando")
+#define CONFIGURE_WIFI String("Configure wifi")

@@ -3,6 +3,8 @@
 void init_wifi()
 {
     WiFiManager wifiManager;
+    wifiManager.setDebugOutput(false);
+    wifiManager.setAPCallback(configModeCallback);
     wifiManager.autoConnect(WIFI_AP_NAME, WIFI_AP_PASS);
 }
 
@@ -26,4 +28,9 @@ int get_wifi_rssi()
         return 2;
     }
     return 1;
+}
+
+void configModeCallback(WiFiManager *myWiFiManager)
+{
+    logo_screen(CONFIGURE_WIFI + "\nSSID:" + WIFI_AP_NAME + " PASS:" + WIFI_AP_PASS);
 }

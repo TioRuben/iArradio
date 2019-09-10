@@ -16,9 +16,7 @@ Libraries used:
  - [ESP32-audioI2S](https://github.com/schreibfaul1/ESP32-audioI2S.git)
  - [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
  - [NTP](https://github.com/sstaub/NTP)
- - [WIFIMANAGER-ESP32](https://github.com/zhouhan0126/WIFIMANAGER-ESP32)
-   - [Web Server](https://github.com/zhouhan0126/WebServer-esp32)
-   - [DNS Server](https://github.com/zhouhan0126/DNSServer---esp32)
+ - [WifiManager]( https://github.com/tzapu/WiFiManager.git)
  - [EasyButton](https://github.com/evert-arias/EasyButton)
 
  ## Current Status
