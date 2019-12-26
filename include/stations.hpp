@@ -26,7 +26,7 @@ Station stations[TOTAL_STATIONS] PROGMEM = {
      "Europa FM"},
     {"http://flucast-m04-05.flumotion.com/cope/cadena100.mp3",
      "Cadena 100"},
-    {"http://20403.live.streamtheworld.com/CADENADIAL.mp3",
+    {"http://21233.live.streamtheworld.com/CADENADIAL.mp3",
      "Cadena Dial"},
     {"http://21303.live.streamtheworld.com/LOS40_CLASSIC.mp3",
      "Los 40 Classic"},
