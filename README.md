@@ -1,6 +1,6 @@
 # iArradio
 
-[![Actions Status](https://github.com/TioRuben/iArradio/workflows/PlatformIO/badge.svg)](https://github.com/TioRuben/iArradio/actions)
+[![Actions Status](https://github.com/TioRuben/iArradio/workflows/PlatformIO/badge.svg)](https://github.com/TioRuben/iArradio)
 
 ## An Internet Radio based on TTGO-T5s EPaper module
 
