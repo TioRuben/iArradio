@@ -30,7 +30,7 @@ Just add a Lithium battery and an speaker connected to speaker pins.
 
 ## Compile
 
-Rename `includes/settings.example.hpp` to `includes/settings.hpp` and configure with your options. Translations are stored in `include/translations.hpp`. Stations list is in `includes/stations.hpp`. Any mp3/aac station will be played. Even a playlists in m3u format. Everything will compile with [PlatformIO](https://platformio.org/). I've used VSCode to developing.
+Rename `includes/settings.example.hpp` to `includes/settings.hpp` and configure with your options. Translations are stored in `include/translations.hpp`. Stations list is in `includes/stations.hpp`. Any mp3/aac station will be played. Even playlists in m3u format. Everything will compile with [PlatformIO](https://platformio.org/). I've used VSCode to developing.
 
 ## Case
 
