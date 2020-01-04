@@ -71,9 +71,13 @@ void task_epaper_rssi(void *parameter)
         {
             updating = true;
             uint8_t rssi = get_wifi_rssi();
-            set_epaper_wifi_signal(rssi);
+            if (rssi != old_rssi)
+            {
+                old_rssi = rssi;
+                set_epaper_wifi_signal(rssi);
+            }
             updating = false;
-            vTaskDelay(portTICK_PERIOD_MS * 8250);
+            vTaskDelay(portTICK_PERIOD_MS * 1250);
         }
         vTaskDelay(portTICK_PERIOD_MS * 150);
     }
