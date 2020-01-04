@@ -60,26 +60,27 @@ void set_epaper_date(String date, String dayOfWeek)
     display.powerOff();
 }
 
-void subrutine_meteo(String temperature)
+void subrutine_meteo(String temperature, char icon)
 {
     display.setTextColor(GxEPD_BLACK);
-    display.setCursor(109, 42);
     display.setFont(&Meteocons_Regular_35);
+    display.setCursor(109, 32);
     display.write(39);
     display.setFont(&FreeSansBold18pt7b);
     display.print(temperature);
     display.setFont(&Meteocons_Regular_35);
     display.write(42);
-    display.write(49);
+    display.setCursor(150, 78);
+    display.write(icon);
 }
 
-void set_epaper_meteo(String temperature)
+void set_epaper_meteo(String temperature, char icon)
 {
-    display.setPartialWindow(109, 0, display.width() - 109, 45);
+    display.setPartialWindow(109, 0, display.width() - 109, 80);
     do
     {
         display.fillScreen(GxEPD_WHITE);
-        subrutine_meteo(temperature);
+        subrutine_meteo(temperature, icon);
     } while (display.nextPage());
     display.powerOff();
 }

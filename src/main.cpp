@@ -22,6 +22,7 @@ void setup()
   init_audio();
   configure_buttons();
   xTaskCreate(task_ntp, "TaskNTP", 35000, NULL, 1, NULL);
+  xTaskCreate(task_weather, "TaskWEATHER", 35000, NULL, 1, NULL);
   xTaskCreate(task_epaper_battery, "TaskEpaperBattery", 35000, NULL, 1, NULL);
   xTaskCreate(task_epaper_rssi, "TaskEpaperRSSI", 35000, NULL, 1, NULL);
   handle_home();
