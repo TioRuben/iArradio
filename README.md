@@ -32,9 +32,13 @@ Just add a Lithium battery and an speaker connected to speaker pins.
 
 Rename `includes/settings.example.hpp` to `includes/settings.hpp` and configure with your options. Translations are stored in `include/translations.hpp`. Stations list is in `includes/stations.hpp`. Any mp3/aac station will be played. Even playlists in m3u format. Everything will compile with [PlatformIO](https://platformio.org/). I've used VSCode to developing.
 
+This code is compatible with dual boot, as Lyusupov explains in: [This wiki page](https://github.com/lyusupov/SoftRF/wiki/SkyView.-Dual-boot).
+
 ## Case
 
 The case design it's not mine, you can download it from [Thingiverse](https://www.thingiverse.com/thing:4057992). It can fit the circuit, a 18650 battery and an small speaker.
+
+Also you can use the [SkyView](https://github.com/lyusupov/SoftRF/tree/master/case/SkyView) enclosure with a LiPo battery. Just change `BATTERY_MAX_V` and `BATTERY_MIN_V` at `includes/battery.hpp` in to LiPo values.
 
 ## Usage
 
